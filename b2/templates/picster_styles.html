@@ -4,99 +4,142 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+          integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../static/css/style.css">
     <title>Picster</title>
 </head>
 <body>
-    <header>
-        <h1 class="display-4 text-center my-6">Style</h1>
-        
-        <hr>
-      </header>
+<header>
+    <h1 class="display-4 text-center my-6">Style</h1>
 
-      <div class="container">
-        <!-- JAVASCRIPT BEHAVIOR -->
-        <div class="row mb-5">
-          <div class="col-4">
+    <hr>
+</header>
+
+<div class="container">
+    <!-- JAVASCRIPT BEHAVIOR -->
+    <div class="row mb-5">
+        <div class="col-4">
             <div class="list-group mb-5" id="list-tab" role="tablist">
-                <a class="list-group-item list-group-item-action active" id="list-home-list" href="#list-home" data-toggle="list">Popular Styles </a>
-                <a class="list-group-item list-group-item-action" id="list-about-list" href="#list-about" data-toggle="list">Upload Style</a>
+                <a class="list-group-item list-group-item-action active" id="list-home-list" href="#list-home"
+                   data-toggle="list">Popular Styles </a>
+                <a class="list-group-item list-group-item-action" id="list-about-list" href="#list-about"
+                   data-toggle="list">Upload Style</a>
+                <a class="list-group-item list-group-item-action" id="list-about-list" href="#list-about_images"
+                   data-toggle="list">Upload images</a>
+                <a class="list-group-item list-group-item-action" id="list-about-list" href="#generated_images"
+                   data-toggle="list">Generate</a>
             </div>
-          </div>
-          <div class="col-8">
-            <div class="tab-content" id="nav-tabContent">
-              <div class="tab-pane fade show active" id="list-home" role="tabpanel">
-                  <p>Please select your style:</p>
-                  <div class="row mb-5">
-                      <!-- column 1 -->
-                      <button class="btn btn-outline-success" onclick="hideTooltip()">
-                          <img class="img-responsive" src="https://static.pexels.com/photos/45201/kitty-cat-kitten-pet-45201.jpeg" alt="style image">
-                      </button>
-                      <button class="btn btn-outline-success" onclick="hideTooltip()">
-                          <img class="img-responsive" src="https://images.pexels.com/photos/259803/pexels-photo-259803.jpeg?w=940&h=650&dpr=2&auto=compress&cs=tinysrgb" alt="style image" >
-                      </button>
-                      <button class="btn btn-outline-success" onclick="hideTooltip()">
-                          <img class="img-responsive" src="https://d1wn0q81ehzw6k.cloudfront.net/additional/thul/media/0eaa14d11e8930f5?w=400&h=400" alt="style image" >
-                      </button>
-                      <!-- column 2 -->
-                      <button class="btn btn-outline-success" onclick="hideTooltip()">
-                          <img class="img-responsive" src="https://www.nationalgeographic.com/content/dam/animals/thumbs/rights-exempt/mammals/d/domestic-dog_thumb.jpg" alt="style image">
-                      </button>
-                      <button class="btn btn-outline-success" onclick="hideTooltip()">
-                          <img class="img-responsive" src="https://www.what-dog.net/Images/faces2/scroll0015.jpg" alt="style image" >
-                      </button>
-                      <button class="btn btn-outline-success" onclick="hideTooltip()">
-                          <img class="img-responsive" src="https://www.barkforce.com/wp-content/uploads/2017/11/impossibly-cute-puppy-8-1.jpg" alt="style image" >
-                      </button>
-                  </div>
-                  <!--<div class="picker">
-                      <select class="image-picker show-html">
-                          <option data-img-src="http://markinternational.info/data/out/572/223939747-butterflies-images.jpg" data-img-class="first" data-img-alt="Page 1" value="1">  Page 1  </option>
-                          <option data-img-src="http://markinternational.info/data/out/572/223939747-butterflies-images.jpg" data-img-alt="Page 2" value="2">  Page 2  </option>
-                          <option data-img-src="http://markinternational.info/data/out/572/223939747-butterflies-images.jpgg" data-img-alt="Page 3" value="3">  Page 3  </option>
-                          <option data-img-src="http://markinternational.info/data/out/572/223939747-butterflies-images.jpg" data-img-alt="Page 4" value="4">  Page 4  </option>
-                          <option data-img-src="http://markinternational.info/data/out/572/223939747-butterflies-images.jpg" data-img-alt="Page 5" value="5">  Page 5  </option>
-                          <option data-img-src="http://markinternational.info/data/out/572/223939747-butterflies-images.jpg" data-img-alt="Page 6" value="6">  Page 6  </option>
-                          <option data-img-src="http://markinternational.info/data/out/572/223939747-butterflies-images.jpg" data-img-alt="Page 7" value="7">  Page 7  </option>
-                          <option data-img-src="http://markinternational.info/data/out/572/223939747-butterflies-images.jpg" data-img-alt="Page 8" value="8">  Page 8  </option>
-                          <option data-img-src="http://markinternational.info/data/out/572/223939747-butterflies-images.jpg" data-img-alt="Page 9" data-img-class="last" value="9"> Page 9 </option>
-                      </select>
-                  </div>-->
-              </div>
-              <div class="tab-pane fade" id="list-about" role="tabpanel">
-                  <p>Upload a style image from your own computer. </p>
-                  <!--<div class="form-group">
-                      <label for="file">File input</label>
-                      <input type="file" id="file" class="form-control-file">
-                       <small id="fileHelp" class="form-text text-muted">Max 3mb size</small> 
-                  </div>-->
-                  <label class="label label-default label-outlined">
-                    Choose file <input type="file" hidden>
-                  </label>
-                  
-              </div>
-            </div>
-          </div>
         </div>
+        <div class="col-8">
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="list-home" role="tabpanel">
+                    <p>Please select your style:</p>
+                    <div class="row mb-5">
+                        {% for style_image in style_images %}
+                            <button type="submit" class="btn btn-outline-success" data-toggle="button"
+                                    onclick="hideTooltip()"
+                                    name="style_images"
+                                    value="{{ style_image }}">
+                                <img class="img-responsive"
+                                     src="{{ url_for('static',filename=style_image) }}"
+                                     alt="style image">
+                            </button>
+                        {% endfor %}
+                    </div>
+                    <!--<div class="picker">
+                        <select class="image-picker show-html">
+                            <option data-img-src="http://markinternational.info/data/out/572/223939747-butterflies-images.jpg" data-img-class="first" data-img-alt="Page 1" value="1">  Page 1  </option>
+                            <option data-img-src="http://markinternational.info/data/out/572/223939747-butterflies-images.jpg" data-img-alt="Page 2" value="2">  Page 2  </option>
+                            <option data-img-src="http://markinternational.info/data/out/572/223939747-butterflies-images.jpgg" data-img-alt="Page 3" value="3">  Page 3  </option>
+                            <option data-img-src="http://markinternational.info/data/out/572/223939747-butterflies-images.jpg" data-img-alt="Page 4" value="4">  Page 4  </option>
+                            <option data-img-src="http://markinternational.info/data/out/572/223939747-butterflies-images.jpg" data-img-alt="Page 5" value="5">  Page 5  </option>
+                            <option data-img-src="http://markinternational.info/data/out/572/223939747-butterflies-images.jpg" data-img-alt="Page 6" value="6">  Page 6  </option>
+                            <option data-img-src="http://markinternational.info/data/out/572/223939747-butterflies-images.jpg" data-img-alt="Page 7" value="7">  Page 7  </option>
+                            <option data-img-src="http://markinternational.info/data/out/572/223939747-butterflies-images.jpg" data-img-alt="Page 8" value="8">  Page 8  </option>
+                            <option data-img-src="http://markinternational.info/data/out/572/223939747-butterflies-images.jpg" data-img-alt="Page 9" data-img-class="last" value="9"> Page 9 </option>
+                        </select>
+                    </div>-->
+                </div>
+                <div class="tab-pane fade" id="list-about" role="tabpanel">
+                    <p>Upload a style image from your own computer. </p>
+                    <!--<div class="form-group">
+                        <label for="file">File input</label>
+                        <input type="file" id="file" class="form-control-file">
+                         <small id="fileHelp" class="form-text text-muted">Max 3mb size</small>
+                    </div>-->
+                    <label class="label label-default label-outlined">
+                        Choose file <input type="file" hidden>
+                    </label>
 
+                </div>
+                <div class="tab-pane fade" id="list-about_images" role="tabpanel">
+                    <div class="container">
+                        <div class="col1">
+                            <p>Upload a image from your own computer. </p>
+                            <form method=post enctype="multipart/form-data">
+                                <div class="row1">
+                                    <label class="label label-default label-outlined">
+                                        Choose file <input type="file" value="Upload" name=file hidden>
+                                    </label>
+                                </div>
+                                <div class="row2">
+                                    <input type="submit" class="btn btn-primary" value="submit">
+                                </div>
+                            </form>
+                            <div class="row4">
+                                <div class="container">
+                                    {% if has_uploaded == true %}
+                                        {% for image in images %}
+                                            <div class="row align-items-start">
+                                            <button class="btn btn-outline-success" data-toggle="button">
+                                                <div class="card" style="width: 20rem;">
+                                                    <input type="image" src="{{ url_for('static', filename=image) }}"
+                                                           name="imagebox"/>
+                                                    <form method=post enctype="multipart/form-data">
+                                                    <button type="submit" name="start_generate" value="start_generate" class="btn btn-primary">
+                                                        Generate!
+                                                    </button>
+                                                    </form>
+                                                </div>
+                                            </button>
+                                        {% endfor %}
+                                    {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="generated_images" role="tabpanel">
 
-    </div><!-- ./container -->
-    <div style="margin-top:500px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
-    
-    <script>
-        // Init tooltips
-        $('[data-toggle="tooltip"]').tooltip();
+</div><!-- ./container -->
+<div style="margin-top:500px;"></div>
 
-        function hideTooltip(){
-          $('#hello').tooltip('hide');
-        }
-        
-    </script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+        integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
+        integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
+        crossorigin="anonymous"></script>
+
+<script>
+    // Init tooltips
+    $('[data-toggle="tooltip"]').tooltip();
+
+    function hideTooltip() {
+        $('#hello').tooltip('hide');
+    }
+
+</script>
 
 </body>
 </html>

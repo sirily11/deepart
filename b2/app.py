@@ -1,4 +1,6 @@
 import os
+
+import sys
 from flask import Flask, request, redirect, url_for, flash
 from flask import render_template
 from werkzeug.utils import secure_filename
@@ -12,7 +14,7 @@ ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = SYSTEM_FOLDER + "/static/" + UPLOAD_FOLDER
 img_size = [300, 300]
-
+selected_styles = []
 '''
 Main page
 '''
@@ -22,7 +24,7 @@ def main():
 
 
 '''
-data for ComS 319
+data for ComS 309
 '''
 
 
@@ -43,6 +45,13 @@ def data():
 def upload():
     if request.method == 'POST':
         # check if the post request has the file part
+
+        if "start_generate" in request.form:
+            print("Start")
+            style_transform(saving_image_path='static/uploaded/generate_images',
+                            content="static/" + view_all_images()[0],
+                            style="static/" + view_all_style_images()[0])
+
         if 'file' not in request.files:
             flash('No file part')
             return redirect(request.url)
@@ -60,26 +69,30 @@ def upload():
             img = Image.open(savePath)
             img.thumbnail(img_size)
             img.save(savePath)
-            return render_template("upload_file.html", has_uploaded=True, user_image=UPLOAD_FOLDER + filename)
+            imglist = view_all_images()
+            return render_template("picster_styles.html", has_uploaded=True,
+                                   user_image=UPLOAD_FOLDER + filename,
+                                   images=imglist,style_images = view_all_style_images())
+    return render_template("picster_styles.html", has_uploaded=False,
+                           style_images = view_all_style_images(),selected_style_imgs=selected_styles)
 
-    return render_template("upload_file.html", has_uploaded=False)
 
 
-@app.route('/view_all_images')
 def view_all_images():
     imgList = os.listdir(app.config['UPLOAD_FOLDER'])
     newImgList = []
     for img in imgList:
         if allowed_file(img):
             newImgList.append(UPLOAD_FOLDER + img)
-    return render_template("view_all_images.html", images=newImgList)
+    return newImgList
 
-
-@app.route('/picster_styles')
-def select_styles():
-    return render_template("picster_styles.html")
-
-
+def view_all_style_images():
+    imgList = os.listdir('static/uploaded/style_images/')
+    newImgList = []
+    for img in imgList:
+        if allowed_file(img):
+            newImgList.append('uploaded/style_images/' + img)
+    return newImgList
 
 def allowed_file(filename):
     return '.' in filename and \
