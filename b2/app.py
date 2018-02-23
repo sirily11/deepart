@@ -51,6 +51,7 @@ def upload():
             style_transform(saving_image_path='static/uploaded/generate_images',
                             content="static/" + view_all_images()[0],
                             style="static/" + view_all_style_images()[0])
+            return "Waiting for transforming"
 
         if 'file' not in request.files:
             flash('No file part')
