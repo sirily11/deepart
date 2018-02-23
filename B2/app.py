@@ -4,6 +4,7 @@ from flask import render_template
 from werkzeug.utils import secure_filename
 import json
 from PIL import Image
+from deepart import style_transform
 
 SYSTEM_FOLDER = os.getcwd()
 UPLOAD_FOLDER = 'uploaded/images/'

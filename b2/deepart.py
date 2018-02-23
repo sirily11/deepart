@@ -154,4 +154,3 @@ def style_transform(saving_image_path, content, style, iterations=1):
     cv2.imwrite(saving_image_path, x)
 
 
-style_transform("saving.png", content="chicago.jpg", style="starry_night.jpg", iterations=1)
