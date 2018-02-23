@@ -9,11 +9,55 @@
     <title>Picster</title>
 </head>
 <body>
+    <!-- NAVBAR - put at top of all html pages -->
+    <nav class="navbar navbar-expand-sm navbar-light bg-light mb-3">
+        <div class="container">
+          <a class="navbar-brand" href="#">Picster</a>
+          <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav mr-auto">
+                  <li class="nav-item">
+                      <a class="nav-link" href="home_page.html">Home</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#">Log in</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#">View Gallery</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                      <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Start Creating</a>
+                      <div class="dropdown-menu">
+                        <a href="#" class="dropdown-item">Upload your photo</a>
+                        <a href="picster_styles.html" class="dropdown-item">Select style</a>
+                        <a href="#" class="dropdown-item">Save</a>
+                      </div>
+                  </li >
+                  <li class="nav-item">
+                      <a class="nav-link" href="FAQ.html">FAQs</a>
+                  </li >
+                  <li class="nav-item">
+                      <a class="nav-link" href="https://www.iastate.edu/">Contact</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#">Careers</a>
+                  </li>
+              </ul>
+
+              <form class="form-inline my-2 my-lg-0">
+                <input type="text" class="form-control mr-sm-2" placeholder="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0">Search</button>
+              </form>
+            </div>
+          </div>
+    </nav>
+    
+    <!-- Select styles -->
     <header>
         <h1 class="display-4 text-center my-6">Style</h1>
         
         <hr>
-      </header>
+    </header>
 
       <div class="container">
         <!-- JAVASCRIPT BEHAVIOR -->
@@ -50,19 +94,6 @@
                           <img class="img-responsive" src="https://www.barkforce.com/wp-content/uploads/2017/11/impossibly-cute-puppy-8-1.jpg" alt="style image" >
                       </button>
                   </div>
-                  <!--<div class="picker">
-                      <select class="image-picker show-html">
-                          <option data-img-src="http://markinternational.info/data/out/572/223939747-butterflies-images.jpg" data-img-class="first" data-img-alt="Page 1" value="1">  Page 1  </option>
-                          <option data-img-src="http://markinternational.info/data/out/572/223939747-butterflies-images.jpg" data-img-alt="Page 2" value="2">  Page 2  </option>
-                          <option data-img-src="http://markinternational.info/data/out/572/223939747-butterflies-images.jpgg" data-img-alt="Page 3" value="3">  Page 3  </option>
-                          <option data-img-src="http://markinternational.info/data/out/572/223939747-butterflies-images.jpg" data-img-alt="Page 4" value="4">  Page 4  </option>
-                          <option data-img-src="http://markinternational.info/data/out/572/223939747-butterflies-images.jpg" data-img-alt="Page 5" value="5">  Page 5  </option>
-                          <option data-img-src="http://markinternational.info/data/out/572/223939747-butterflies-images.jpg" data-img-alt="Page 6" value="6">  Page 6  </option>
-                          <option data-img-src="http://markinternational.info/data/out/572/223939747-butterflies-images.jpg" data-img-alt="Page 7" value="7">  Page 7  </option>
-                          <option data-img-src="http://markinternational.info/data/out/572/223939747-butterflies-images.jpg" data-img-alt="Page 8" value="8">  Page 8  </option>
-                          <option data-img-src="http://markinternational.info/data/out/572/223939747-butterflies-images.jpg" data-img-alt="Page 9" data-img-class="last" value="9"> Page 9 </option>
-                      </select>
-                  </div>-->
               </div>
               <div class="tab-pane fade" id="list-about" role="tabpanel">
                   <p>Upload a style image from your own computer. </p>
@@ -82,7 +113,7 @@
 
 
     </div><!-- ./container -->
-    <div style="margin-top:500px;"></div>
+<!--    <div style="margin-top:500px;"></div>-->
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
