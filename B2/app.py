@@ -74,6 +74,12 @@ def view_all_images():
     return render_template("view_all_images.html", images=newImgList)
 
 
+@app.route('/picster_styles')
+def select_styles():
+    return render_template("picster_styles.html")
+
+
+
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
