@@ -52,6 +52,7 @@ RUN wget https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.zip \
 && rm /${OPENCV_VERSION}.zip \
 && rm -r /opencv-${OPENCV_VERSION}
 RUN pip install h5py
+RUN pip install pyrebase
 WORKDIR /usr/src/app/flask
 EXPOSE 80
 CMD [ "python","app.py"]

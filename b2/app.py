@@ -7,6 +7,9 @@ from werkzeug.utils import secure_filename
 import json
 from PIL import Image
 from deepart import style_transform
+from firebase import login_user_with_eamil
+
+
 
 SYSTEM_FOLDER = os.getcwd()
 UPLOAD_FOLDER = 'uploaded/images/'
@@ -26,8 +29,6 @@ def main():
 '''
 data for ComS 309
 '''
-
-
 @app.route('/data/', methods=['GET'])
 def data():
     account = request.args.get('account')
@@ -80,6 +81,21 @@ def upload():
 @app.route('/faq')
 def faq():
     return render_template('FAQ.html')
+
+
+@app.route('/login',methods=['POST','GET'])
+def login():
+    if request.method == 'POST':
+        email = request.form['login_email']
+        password = request.form['login_password']
+        message = login_user_with_eamil(email,password)
+        print(message)
+        if message != False:
+            return redirect("/home")
+        else:
+            return redirect("/login")
+    return render_template("Login.html")
+
 
 def view_all_images():
     imgList = os.listdir(app.config['UPLOAD_FOLDER'])
