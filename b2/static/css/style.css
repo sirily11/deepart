@@ -12,13 +12,24 @@ BUTTON:hover {
     background-color: #f0f0f0;        
 }
 */
+
+body {
+/*    background-color: lightcyan;*/
+    padding-right: 50px;
+    padding-left: 50px;
+}
 .btn-outline-success{
     margin-right: 5px;
 }
 
-img {
+.img-responsive {
 	width:200px;
 	height:200px;
+}
+
+.d-block {
+    width:800px;
+	height:400px;
 }
 
 .label {

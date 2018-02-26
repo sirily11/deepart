@@ -18,9 +18,9 @@ selected_styles = []
 '''
 Main page
 '''
-@app.route('/')
+@app.route('/home')
 def main():
-    return render_template("hello.html")
+    return render_template("home_page.html")
 
 
 '''
@@ -77,7 +77,9 @@ def upload():
     return render_template("picster_styles.html", has_uploaded=False,
                            style_images = view_all_style_images(),selected_style_imgs=selected_styles)
 
-
+@app.route('/faq')
+def faq():
+    return render_template('FAQ.html')
 
 def view_all_images():
     imgList = os.listdir(app.config['UPLOAD_FOLDER'])
