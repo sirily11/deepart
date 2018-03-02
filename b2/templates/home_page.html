@@ -10,31 +10,10 @@
 </head>
 <body>
     <!--Navigation bar-->
-    <div class="navbar" id="nav-placeholder"></div>
-    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-    <script>
-        $.get("navbar.html", function(data){
-            $("#nav-placeholder").replaceWith(data);
-        });
-    </script>
-<!--
-    <style>
-        .navbar{
-          position: absolute;
-          top: 0px;
-          z-index:999;
-        }
-    </style>
+    {% include "navbar.html" %}
+
 -->
     <!--end of Navigation bar-->
-
-              <form class="form-inline my-2 my-lg-0">
-                <input type="text" class="form-control mr-sm-2" placeholder="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0">Search</button>
-              </form>
-            </div>
-          </div>
-    </nav>
     
     <!-- Content -->
     <div class="card bg-dark text-white">
