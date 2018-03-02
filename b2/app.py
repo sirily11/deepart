@@ -7,7 +7,7 @@ from werkzeug.utils import secure_filename
 import json
 from PIL import Image
 from deepart import style_transform
-from firebase import login_user_with_eamil,signup_user_with_email
+from firebase import login_user_with_eamil
 
 
 
@@ -85,6 +85,18 @@ def faq():
 @app.route('/signup')
 def signup():
     return render_template('signup.html',message="Hello world")
+
+@app.route('/careers')
+def careers():
+	return render_template('careers.html')
+
+@app.route('/contact')
+def contact():
+	return render_template('contact.html')
+
+@app.route('/gallery')
+def gallery():
+	return render_template('gallery.html')
 
 
 @app.route('/login',methods=['POST','GET'])
