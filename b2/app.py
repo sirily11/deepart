@@ -82,6 +82,18 @@ def upload():
 def faq():
     return render_template('FAQ.html')
 
+@app.route('/careers')
+def careers():
+	return render_template('careers.html')
+	
+@app.route('/contact')
+def contact():
+	return render_template('contact.html')
+
+@app.route('/gallery')
+def gallery():
+	return render_template('gallery.html')
+
 
 @app.route('/login',methods=['POST','GET'])
 def login():
