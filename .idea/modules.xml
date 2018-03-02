@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/.idea/b2.iml" filepath="$PROJECT_DIR$/.idea/b2.iml" />
+=======
+      <module fileurl="file://$PROJECT_DIR$/.idea/B2.iml" filepath="$PROJECT_DIR$/.idea/B2.iml" />
+>>>>>>> origin/Maxwell_Farver
     </modules>
   </component>
 </project>
