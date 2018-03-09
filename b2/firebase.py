@@ -47,6 +47,5 @@ def reset_password(email):
     auth.send_password_reset_email(email)
 
 
-reset_password("sirily1997@gmail.com")
 
 

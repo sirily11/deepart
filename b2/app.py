@@ -6,8 +6,10 @@ from flask import render_template
 from werkzeug.utils import secure_filename
 import json
 from PIL import Image
+from celery import Celery
 from deepart import style_transform
 from firebase import login_user_with_eamil
+from firebase import reset_password,signup_user_with_email
 
 
 
@@ -16,13 +18,14 @@ UPLOAD_FOLDER = 'uploaded/images/'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = SYSTEM_FOLDER + "/static/" + UPLOAD_FOLDER
+
 img_size = [300, 300]
 selected_styles = []
 '''
 Main page
 '''
 @app.route('/home')
-def main():
+def home():
     return render_template("home_page.html")
 
 
@@ -49,10 +52,14 @@ def upload():
 
         if "start_generate" in request.form:
             print("Start")
-            style_transform(saving_image_path='static/uploaded/generate_images',
+            app.config.update(
+                CELERY_BROKER_URL=url_for("upload"),
+            )
+            result = style_transform.delay(saving_image_path='static/uploaded/generate_images',
                             content="static/" + view_all_images()[0],
                             style="static/" + view_all_style_images()[0])
-            return "Waiting for transforming"
+
+            result.wait()
 
         if 'file' not in request.files:
             flash('No file part')
@@ -84,19 +91,28 @@ def faq():
 
 @app.route('/signup')
 def signup():
-    return render_template('signup.html',message="Hello world")
+    if request.method == 'POST':
+        email = request.form['login_email']
+        password = request.form['login_password']
+        message = signup_user_with_email(email,password)
+        print(message)
+        if message != False:
+            return redirect("/home")
+        else:
+            return redirect("/home")
+    return render_template('login.html',message="Hello world")
 
 @app.route('/careers')
 def careers():
-	return render_template('careers.html')
+    return render_template('careers.html')
 
 @app.route('/contact')
 def contact():
-	return render_template('contact.html')
+    return render_template('contact.html')
 
 @app.route('/gallery')
 def gallery():
-	return render_template('gallery.html')
+    return render_template('gallery.html')
 
 
 @app.route('/login',methods=['POST','GET'])
@@ -111,6 +127,19 @@ def login():
         else:
             return redirect("/login")
     return render_template("Login.html")
+
+@app.route('/reset',methods=['POST','GET'])
+def reset():
+    if request.method == 'POST':
+        email = request.form['reset_email']
+        message = reset_password(email)
+        print(message)
+        if message != False:
+            return redirect("/login")
+        else:
+            return redirect("/reset")
+    return render_template("Reset.html")
+
 
 
 def view_all_images():
@@ -133,6 +162,19 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+def make_celery(app):
+    celery = Celery(app.import_name, broker=app.config['CELERY_BROKER_URL'])
+    celery.conf.update(app.config)
+    TaskBase = celery.Task
+    class ContextTask(TaskBase):
+        abstract = True
+        def __call__(self, *args, **kwargs):
+            with app.app_context():
+                return TaskBase.__call__(self, *args, **kwargs)
+    celery.Task = ContextTask
+    return celery
 
 if __name__ == '__main__':
+
     app.run(host='0.0.0.0', port=80, debug=True)
+    celery = make_celery(app)

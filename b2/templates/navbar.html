@@ -6,10 +6,13 @@
             <div class="collapse navbar-collapse" id="navbarNav">
               <ul class="navbar-nav mr-auto">
                   <li class="nav-item">
-                      <a class="nav-link" href="home_page.html">Home</a>
+                      <a class="nav-link" href={{ url_for('home') }}>Home</a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link" href="#" >Log in</a>
+                      <a class="nav-link" href={{ url_for('signup') }}>Sign up</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href={{ url_for('login') }} >Log in</a>
                   </li>
                   <li class="nav-item">
                       <a class="nav-link" href="#">View Gallery</a>
@@ -18,12 +21,12 @@
                       <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Start Creating</a>
                       <div class="dropdown-menu">
                         <a href="#" class="dropdown-item">Upload your photo</a>
-                        <a href="picster_styles.html" class="dropdown-item">Select style</a>
+                        <a href={{ url_for('upload') }} class="dropdown-item">Select style</a>
                         <a href="#" class="dropdown-item">Save</a>
                       </div>
                   </li >
                   <li class="nav-item">
-                      <a class="nav-link" href="FAQ.html">FAQs</a>
+                      <a class="nav-link" href={{ url_for('faq') }}>FAQs</a>
                   </li >
                   <li class="nav-item">
                       <a class="nav-link" href="https://www.iastate.edu/">Contact</a>

@@ -14,14 +14,18 @@ class Image_transfer:
         self.s.listen(5)
 
     def recive_image(self):
+        print("Reciving img")
         conn, addr = self.s.accept()
         length = self.__recvall__(conn,16)
         img_str = self.__recvall__(conn,int(length))
         img = np.fromstring(img_str,dtype='uint8')
+        print("Finished reciving image")
         self.s.close()
         return img
 
     def send_image(self):
+        conn,addr = self.s.accept()
+        print("Start sending image")
         img = cv2.imread(self.image_name)
         cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
         encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), 90]
@@ -29,8 +33,9 @@ class Image_transfer:
         img_arr = np.array(img_encode)
         img_str = img_arr.tostring()
         size = len(img_str)
-        self.s.send(size)
-        self.s.send(img_str)
+        conn.send(str.encode(str(size)))
+        conn.send(img_str)
+        print("Finished sending image")
         return True
 
     def saveImg(self,img,img_name):
@@ -45,3 +50,5 @@ class Image_transfer:
             buf += newbuf
             count -= len(newbuf)
         return buf
+s = Image_transfer('chicago.jpg',ip_address="10.26.42.38")
+s.send_image()

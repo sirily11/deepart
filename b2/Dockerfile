@@ -6,6 +6,7 @@ RUN pip install Pillow
 RUN pip install numpy
 RUN pip install tensorflow
 RUN pip install keras
+RUn pip install celery
 RUN python -m pip install --user numpy scipy matplotlib ipython jupyter pandas sympy nose
 RUN apt-get update && \
         apt-get install -y \
