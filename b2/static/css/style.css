@@ -12,11 +12,16 @@ BUTTON:hover {
     background-color: #f0f0f0;        
 }
 */
+html {
+    position: relative;
+    min-height: 100%;
+}
 
 body {
 /*    background-color: lightcyan;*/
     padding-right: 50px;
     padding-left: 50px;
+    margin-bottom: 60px; /* Margin bottom by footer height */
 }
 .btn-outline-success{
     margin-right: 5px;
@@ -56,4 +61,14 @@ body {
   color: #3616e2;
   min-width: 600px;
   height: 200px;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: lightgrey;
+    color: white;
+    text-align: center;
 }

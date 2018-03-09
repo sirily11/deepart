@@ -13,7 +13,7 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
           integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="../static/css/style.css">
     <link rel="stylesheet" href="../static/css/gallery.css">
 </head>
 <body>
@@ -23,6 +23,9 @@
 <![endif]-->
 
 <!-- Add your site or application content here -->
+<!--Navigation bar-->
+{% include "navbar.html" %}
+<!--end of Navigation bar-->
 
 <div class="container">
     <h1 class="display-4 text-center my-6">
@@ -35,110 +38,23 @@
             <div class="container">
 
                 <div class="row">
-
+                    {% for transform_image in transform_images %}
                     <div class="col-md-4">
-                        <div class="card mb-4 box-shadow">
-                            <img class="card-img-top"
-                                 data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail"
-                                 alt="Card image cap">
+                        <div class="card mb-4 box-shadow no-gutters">
+                            <img class="card-img-top img-fluid"
+                                 src="{{ url_for('static',filename=transform_image) }}"
+                                 alt="style image">
                             <div class="card-body">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary" src="{{ url_for('static',filename=transform_image) }}">View</button>
                                     </div>
-                                    <small class="text-muted">date</small>
+                                    <small class="text-muted"></small>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-md-4">
-                        <div class="card mb-4 box-shadow">
-                            <img class="card-img-top"
-                                 data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail"
-                                 alt="Card image cap">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                    </div>
-                                    <small class="text-muted">date</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-
-                        <div class="card mb-4 box-shadow">
-                            <img class="card-img-top"
-                                 data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail"
-                                 alt="Card image cap">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                    </div>
-                                    <small class="text-muted">date</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="row">
-
-                    <div class="col-md-4">
-                        <div class="card mb-4 box-shadow">
-                            <img class="card-img-top"
-                                 data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail"
-                                 alt="Card image cap">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                    </div>
-                                    <small class="text-muted">date</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="card mb-4 box-shadow">
-                            <img class="card-img-top"
-                                 data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail"
-                                 alt="Card image cap">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                    </div>
-                                    <small class="text-muted">date</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-
-                        <div class="card mb-4 box-shadow">
-                            <img class="card-img-top"
-                                 data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail"
-                                 alt="Card image cap">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                    </div>
-                                    <small class="text-muted">date</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+                    {% endfor %}
             </div>
         </div>
 
@@ -146,6 +62,9 @@
 
 </div>
 
+<!--Footer bar-->
+{% include "footerbar.html" %}
+<!--end of Footer bar-->
 
 <script src="js/vendor/modernizr-3.5.0.min.js"></script>
 

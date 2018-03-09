@@ -112,7 +112,7 @@ def contact():
 
 @app.route('/gallery')
 def gallery():
-    return render_template('gallery.html')
+    return render_template('gallery.html', transform_images=view_all_transform_images())
 
 
 @app.route('/login',methods=['POST','GET'])
@@ -127,19 +127,6 @@ def login():
         else:
             return redirect("/login")
     return render_template("Login.html")
-
-@app.route('/reset',methods=['POST','GET'])
-def reset():
-    if request.method == 'POST':
-        email = request.form['reset_email']
-        message = reset_password(email)
-        print(message)
-        if message != False:
-            return redirect("/login")
-        else:
-            return redirect("/reset")
-    return render_template("Reset.html")
-
 
 
 def view_all_images():
@@ -173,6 +160,13 @@ def make_celery(app):
                 return TaskBase.__call__(self, *args, **kwargs)
     celery.Task = ContextTask
     return celery
+def view_all_transform_images():
+    imgList = os.listdir('static/uploaded/transform_images/')
+    newImgList = []
+    for img in imgList:
+        if allowed_file(img):
+            newImgList.append('uploaded/transform_images/' + img)
+    return newImgList
 
 if __name__ == '__main__':
 

@@ -11,11 +11,16 @@
     <!-- Place favicon.ico in the root directory -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
           integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="../static/css/style.css">
     <link rel="stylesheet" href="../static/css/contact.css">
     <title>Contact Us</title>
 </head>
 <body>
+
+<!--Navigation bar-->
+{% include "navbar.html" %}
+<!--end of Navigation bar-->
+
 <div class="container">
     <div class="page-header">
         <h1 class="display-4 text-center my-6">
@@ -40,12 +45,11 @@
         </ul>
         </p>
     </div>
-    <footer class="footer">
-        <div class="container">
-            <span class="text-muted">Email: example@example.com Phone: 1-319-867-5309</span>
-        </div>
-    </footer>
 </div>
+
+<!--Footer bar-->
+{% include "footerbar.html" %}
+<!--end of Footer bar-->
 
 
 <script src="js/vendor/modernizr-3.5.0.min.js"></script>
