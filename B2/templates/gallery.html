@@ -13,7 +13,7 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
           integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="../static/css/style.css">
     <link rel="stylesheet" href="../static/css/gallery.css">
 </head>
 <body>
@@ -23,6 +23,10 @@
 <![endif]-->
 
 <!-- Add your site or application content here -->
+
+<!--Navigation bar-->
+{% include "navbar.html" %}
+<!--end of Navigation bar-->
 
 <div class="container">
     <h1 class="display-4 text-center my-6">
@@ -146,6 +150,9 @@
 
 </div>
 
+<!--Footer bar-->
+{% include "footerbar.html" %}
+<!--end of Footer bar-->
 
 <script src="js/vendor/modernizr-3.5.0.min.js"></script>
 
