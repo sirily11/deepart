@@ -96,7 +96,7 @@ def contact():
 
 @app.route('/gallery')
 def gallery():
-	return render_template('gallery.html')
+	return render_template('gallery.html', transform_images = view_all_transform_images())
 
 
 @app.route('/login',methods=['POST','GET'])
@@ -133,6 +133,13 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+def view_all_transform_images():
+    imgList = os.listdir('static/uploaded/transform_images/')
+    newImgList = []
+    for img in imgList:
+        if allowed_file(img):
+            newImgList.append('uploaded/transform_images/' + img)
+    return newImgList
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=6192, debug=True)
