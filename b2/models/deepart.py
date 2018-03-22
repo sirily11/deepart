@@ -12,7 +12,8 @@ from scipy.misc import imsave
 from celery import Celery
 from flask import url_for
 celery = Celery('tasks')
-@celery.task()
+
+@celery.task(name="celery_example.style_transform",bind=True)
 def style_transform(saving_image_path, content, style, iterations=1):
     height = 512
     width = 512

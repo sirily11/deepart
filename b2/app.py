@@ -1,26 +1,29 @@
+import json
 import os
 
-import sys
+from PIL import Image
+from celery import Celery
 from flask import Flask, request, redirect, url_for, flash
 from flask import render_template
 from werkzeug.utils import secure_filename
-import json
-from PIL import Image
-from celery import Celery
-from deepart import style_transform
-from firebase import login_user_with_eamil
-from firebase import reset_password,signup_user_with_email
-
-
+from models.deepart import style_transform
+from models.firebase import login_user_with_eamil
+from models.firebase import signup_user_with_email
 
 SYSTEM_FOLDER = os.getcwd()
 UPLOAD_FOLDER = 'uploaded/images/'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = SYSTEM_FOLDER + "/static/" + UPLOAD_FOLDER
+# Celery configuration
+app.config['CELERY_BROKER_URL'] = 'redis://localhost:6379/0'
+app.config['CELERY_RESULT_BACKEND'] = 'redis://localhost:6379/0'
+celery = Celery('myapp')
+celery.conf.add_defaults(app.config)
 
 img_size = [300, 300]
 selected_styles = []
+
 '''
 Main page
 '''
@@ -44,7 +47,6 @@ def data():
                {"account_id": account, "first_name": "Json", "last_name": "Hacky", "img_url": img[2]}]
     return json.dumps(sumdict)
 
-
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
     if request.method == 'POST':
@@ -52,14 +54,11 @@ def upload():
 
         if "start_generate" in request.form:
             print("Start")
-            app.config.update(
-                CELERY_BROKER_URL=url_for("upload"),
-            )
-            result = style_transform.delay(saving_image_path='static/uploaded/generate_images',
-                            content="static/" + view_all_images()[0],
-                            style="static/" + view_all_style_images()[0])
 
-            result.wait()
+            style_transform.apply_async(('static/uploaded/generate_images',
+                        "static/" + view_all_images()[0],
+                        "static/" + view_all_style_images()[0]))
+            return "start processing"
 
         if 'file' not in request.files:
             flash('No file part')
