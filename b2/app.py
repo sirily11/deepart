@@ -1,6 +1,7 @@
 import json
 import os
 import threading
+
 import time
 from PIL import Image
 from celery import Celery
@@ -169,4 +170,4 @@ def view_all_transform_images():
 
 if __name__ == '__main__':
 
-    app.run(host='0.0.0.0', port=80, debug=True)
+    app.run(host='0.0.0.0', port=8080, debug=True)
