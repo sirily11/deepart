@@ -11,12 +11,10 @@ from scipy.optimize import fmin_l_bfgs_b
 from scipy.misc import imsave
 from celery import Celery
 from flask import url_for
-celery = Celery('tasks')
 
-@celery.task(name="celery_example.style_transform",bind=True)
 def style_transform(saving_image_path, content, style, iterations=1):
-    height = 512
-    width = 512
+    height = 128
+    width = 128
     content_image_path = content
     content_image = Image.open(content_image_path)
     content_image = content_image.resize((height, width))

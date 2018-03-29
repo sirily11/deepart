@@ -1,6 +1,7 @@
 import json
 import os
-
+import threading
+import time
 from PIL import Image
 from celery import Celery
 from flask import Flask, request, redirect, url_for, flash
@@ -18,8 +19,6 @@ app.config['UPLOAD_FOLDER'] = SYSTEM_FOLDER + "/static/" + UPLOAD_FOLDER
 # Celery configuration
 app.config['CELERY_BROKER_URL'] = 'redis://localhost:6379/0'
 app.config['CELERY_RESULT_BACKEND'] = 'redis://localhost:6379/0'
-celery = Celery('myapp')
-celery.conf.add_defaults(app.config)
 
 img_size = [300, 300]
 selected_styles = []
@@ -55,9 +54,10 @@ def upload():
         if "start_generate" in request.form:
             print("Start")
 
-            style_transform.apply_async(('static/uploaded/generate_images',
+            thread = threading.Thread(target=style_transform, args=('static/uploaded/generate_images/{}.jpg'.format(time.time()),
                         "static/" + view_all_images()[0],
-                        "static/" + view_all_style_images()[0]))
+                        "static/" + view_all_style_images()[0] +"",2))
+            thread.start()
             return "start processing"
 
         if 'file' not in request.files:
@@ -170,4 +170,3 @@ def view_all_transform_images():
 if __name__ == '__main__':
 
     app.run(host='0.0.0.0', port=80, debug=True)
-    celery = make_celery(app)
