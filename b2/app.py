@@ -29,8 +29,10 @@ Main page
 '''
 @app.route('/home')
 def home():
-    return render_template("home_page.html")
-
+    return render_template("home_page.html",
+                           images=view_all_home_images(),
+                           images2=view_all_home_images2(),
+                           home_page_image='images/canvas_city.jpg')
 
 '''
 data for ComS 309
@@ -112,7 +114,8 @@ def contact():
 
 @app.route('/gallery')
 def gallery():
-    return render_template('gallery.html', transform_images=view_all_transform_images())
+    return render_template('gallery.html',
+                           transform_images=view_all_transform_images())
 
 
 @app.route('/login',methods=['POST','GET'])
@@ -160,12 +163,30 @@ def make_celery(app):
                 return TaskBase.__call__(self, *args, **kwargs)
     celery.Task = ContextTask
     return celery
+
 def view_all_transform_images():
     imgList = os.listdir('static/uploaded/transform_images/')
     newImgList = []
     for img in imgList:
         if allowed_file(img):
             newImgList.append('uploaded/transform_images/' + img)
+    return newImgList
+
+def view_all_home_images():
+    imgList = os.listdir('static/images/home_images/')
+    newImgList = []
+    for img in imgList:
+
+        if allowed_file(img):
+            newImgList.append('images/home_images2/' + img)
+    return newImgList
+
+def view_all_home_images2():
+    imgList = os.listdir('static/images/home_images2/')
+    newImgList = []
+    for i,img in enumerate(imgList):
+        if allowed_file(img):
+            newImgList.append('images/home_images2/' + "{}.jpg".format(i))
     return newImgList
 
 if __name__ == '__main__':
