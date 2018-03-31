@@ -59,7 +59,7 @@ def upload():
 
             thread = threading.Thread(target=style_transform, args=('static/uploaded/generate_images/{}.jpg'.format(time.time()),
                         "static/" + view_all_images()[0],
-                        "static/" + view_all_style_images()[0] +"",2))
+                        "static/" + view_all_style_images()[0] +"",50))
             thread.start()
             return "start processing"
 
