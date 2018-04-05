@@ -1,5 +1,4 @@
-import cv2
+import time
+from models.deepart import transformer
+import threading
 
-img = cv2.imread("saving.png")
-print(img)
-cv2.imwrite("saving.jpg",img)

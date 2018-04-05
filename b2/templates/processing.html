@@ -1,0 +1,47 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
+        crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+    <title>Picster</title>
+    {% include "navbar.html" %}
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="progress" id='mybar'>
+        <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">25%</div>
+    </div>
+
+    <br>
+    <script>
+            function move(w) {
+                var elem = document.getElementById("mybar");   
+                var width = 1;
+                //
+                //function frame() {
+                  //if (width >= 100) {
+                    //clearInterval(id);
+                  //} else {
+                    width = w; 
+                    elem.textContent = width + '%'; 
+                    elem.style = "width : " + width +'%'
+                    elem.attr ='50';
+                  //}
+               //}
+              }
+              function run() {
+              var id = setInterval(frame, 1000);
+              function frame(){
+              $.getJSON('/background_processing', {
+                                proglang: $('input[name="proglang"]').val(),
+                              }, function(data) {
+                                move(data.progress)
+                              });
+                            }
+                        }
+                run()
+    </script>
+</body>

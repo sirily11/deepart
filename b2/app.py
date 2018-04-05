@@ -1,14 +1,13 @@
 import json
 import os
 import threading
-
 import time
 from PIL import Image
 from celery import Celery
 from flask import Flask, request, redirect, url_for, flash
 from flask import render_template
 from werkzeug.utils import secure_filename
-from models.deepart import style_transform
+from models.deepart import transformer
 from models.firebase import login_user_with_eamil
 from models.firebase import signup_user_with_email
 
@@ -24,13 +23,17 @@ app.config['CELERY_RESULT_BACKEND'] = 'redis://localhost:6379/0'
 img_size = [300, 300]
 selected_styles = []
 
+trans = transformer()
+
+
+
 '''
 Main page
 '''
 @app.route('/home')
 def home():
     return render_template("home_page.html",
-                           images=view_all_home_images(),
+                           images=view_all_home_images2(),
                            images2=view_all_home_images2(),
                            home_page_image='images/canvas_city.jpg')
 
@@ -55,12 +58,7 @@ def upload():
         # check if the post request has the file part
 
         if "start_generate" in request.form:
-            print("Start")
-
-            thread = threading.Thread(target=style_transform, args=('static/uploaded/generate_images/{}.jpg'.format(time.time()),
-                        "static/" + view_all_images()[0],
-                        "static/" + view_all_style_images()[0] +"",50))
-            thread.start()
+            
             return "start processing"
 
         if 'file' not in request.files:
@@ -86,6 +84,31 @@ def upload():
                                    images=imglist,style_images = view_all_style_images())
     return render_template("picster_styles.html", has_uploaded=False,
                            style_images = view_all_style_images(),selected_style_imgs=selected_styles)
+
+@app.route('/processing')
+def processing_image():
+    image_name = request.args.get('image_name')
+    print("Start")
+    
+    thread = threading.Thread(target=trans.style_transform, args=('static/uploaded/generate_images/{}.jpg'.format(time.time()),
+                "static/" + image_name,
+                "static/" + view_all_style_images()[0] +"",10))
+    thread.start()
+    
+    return render_template('processing.html')
+
+@app.route('/background_processing')
+def background_processing():
+    progress = 0
+    try:
+        progress = trans.calculate_the_progress()
+        data = {'progress' : progress}
+        print(progress)
+        return json.dumps(data)
+    except Exception as e:
+        print(e)
+    #return render_template('processing.html',percentage=0)
+
 
 @app.route('/faq')
 def faq():
@@ -152,18 +175,6 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-def make_celery(app):
-    celery = Celery(app.import_name, broker=app.config['CELERY_BROKER_URL'])
-    celery.conf.update(app.config)
-    TaskBase = celery.Task
-    class ContextTask(TaskBase):
-        abstract = True
-        def __call__(self, *args, **kwargs):
-            with app.app_context():
-                return TaskBase.__call__(self, *args, **kwargs)
-    celery.Task = ContextTask
-    return celery
-
 def view_all_transform_images():
     imgList = os.listdir('static/uploaded/transform_images/')
     newImgList = []
@@ -189,6 +200,13 @@ def view_all_home_images2():
             newImgList.append('images/home_images2/' + "{}.jpg".format(i))
     return newImgList
 
-if __name__ == '__main__':
 
+def testCounter():
+    global x
+    for i in range(100):
+        x = i
+        time.sleep(1)
+    
+if __name__ == '__main__':
+    thread = threading.Thread(target=testCounter)
     app.run(host='0.0.0.0', port=8080, debug=True)

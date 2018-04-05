@@ -39,37 +39,20 @@
                     <p>Please select your style:</p>
                     <div class="row mb-5">
                         {% for style_image in style_images %}
-                            <button type="submit" class="btn btn-outline-success" data-toggle="button"
-                                    onclick="hideTooltip()"
-                                    name="style_images"
-                                    value="{{ style_image }}">
-                                <img class="img-responsive"
-                                     src="{{ url_for('static',filename=style_image) }}"
-                                     alt="style image">
-                            </button>
+                        <button type="submit" class="btn btn-outline-success" data-toggle="button"
+                                onclick="hideTooltip()"
+                                name="style_images"
+                                value="{{ style_image }}">
+                            <img class="img-responsive"
+                                 href = 'processing'
+                                 src="{{ url_for('static',filename=style_image) }}"
+                                 alt="style image">
+                        </button>
                         {% endfor %}
                     </div>
-                    <!--<div class="picker">
-                        <select class="image-picker show-html">
-                            <option data-img-src="http://markinternational.info/data/out/572/223939747-butterflies-images.jpg" data-img-class="first" data-img-alt="Page 1" value="1">  Page 1  </option>
-                            <option data-img-src="http://markinternational.info/data/out/572/223939747-butterflies-images.jpg" data-img-alt="Page 2" value="2">  Page 2  </option>
-                            <option data-img-src="http://markinternational.info/data/out/572/223939747-butterflies-images.jpgg" data-img-alt="Page 3" value="3">  Page 3  </option>
-                            <option data-img-src="http://markinternational.info/data/out/572/223939747-butterflies-images.jpg" data-img-alt="Page 4" value="4">  Page 4  </option>
-                            <option data-img-src="http://markinternational.info/data/out/572/223939747-butterflies-images.jpg" data-img-alt="Page 5" value="5">  Page 5  </option>
-                            <option data-img-src="http://markinternational.info/data/out/572/223939747-butterflies-images.jpg" data-img-alt="Page 6" value="6">  Page 6  </option>
-                            <option data-img-src="http://markinternational.info/data/out/572/223939747-butterflies-images.jpg" data-img-alt="Page 7" value="7">  Page 7  </option>
-                            <option data-img-src="http://markinternational.info/data/out/572/223939747-butterflies-images.jpg" data-img-alt="Page 8" value="8">  Page 8  </option>
-                            <option data-img-src="http://markinternational.info/data/out/572/223939747-butterflies-images.jpg" data-img-alt="Page 9" data-img-class="last" value="9"> Page 9 </option>
-                        </select>
-                    </div>-->
                 </div>
                 <div class="tab-pane fade" id="list-about" role="tabpanel">
                     <p>Upload a style image from your own computer. </p>
-                    <!--<div class="form-group">
-                        <label for="file">File input</label>
-                        <input type="file" id="file" class="form-control-file">
-                         <small id="fileHelp" class="form-text text-muted">Max 3mb size</small>
-                    </div>-->
                     <label class="label label-default label-outlined">
                         Choose file <input type="file" hidden>
                     </label>
@@ -89,38 +72,30 @@
                                     <input type="submit" class="btn btn-primary" value="submit">
                                 </div>
                             </form>
-                            <div class="row4">
-                                <div class="container">
-                                    {% if has_uploaded == true %}
-                                        {% for image in images %}
-                                            <div class="row align-items-start">
-                                            <button class="btn btn-outline-success" data-toggle="button">
-                                                <div class="card" style="width: 20rem;">
-                                                    <input type="image" src="{{ url_for('static', filename=image) }}"
-                                                           name="imagebox"/>
-                                                    <form method=post enctype="multipart/form-data">
-                                                    <button type="submit" name="start_generate" value="start_generate" class="btn btn-primary">
-                                                        Generate!
-                                                    </button>
-                                                    </form>
-                                                </div>
-                                            </button>
-                                        {% endfor %}
-                                    {% endif %}
-                                    </div>
+
+                            {% if has_uploaded == true %}
+                            
+                                <div class="row mb-5">
+                                    {% for image in images %}
+                                    <button type= "button" class="btn btn-primary" onclick="window.location.href = '\processing\?image_name={{image}}'" >
+                                        <img src="{{ url_for('static', filename=image) }}">
+                                    </button>
+                                    {% endfor %}
                                 </div>
-                            </div>
+
+                            {% endif %}
+
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="generated_images" role="tabpanel">
-
-                </div>
             </div>
         </div>
-    </div>
+        <div class="tab-pane fade" id="generated_images" role="tabpanel">
 
-</div><!-- ./container -->
+        </div>
+    </div>
+</div>
+<!-- ./container -->
 <div style="margin-top:500px;"></div>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
