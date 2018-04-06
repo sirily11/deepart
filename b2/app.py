@@ -176,11 +176,11 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 def view_all_transform_images():
-    imgList = os.listdir('static/uploaded/transform_images/')
+    imgList = os.listdir('static/uploaded/generate_images/')
     newImgList = []
     for img in imgList:
         if allowed_file(img):
-            newImgList.append('uploaded/transform_images/' + img)
+            newImgList.append('uploaded/generate_images/' + img)
     return newImgList
 
 def view_all_home_images():
@@ -200,13 +200,6 @@ def view_all_home_images2():
             newImgList.append('images/home_images2/' + "{}.jpg".format(i))
     return newImgList
 
-
-def testCounter():
-    global x
-    for i in range(100):
-        x = i
-        time.sleep(1)
     
 if __name__ == '__main__':
-    thread = threading.Thread(target=testCounter)
     app.run(host='0.0.0.0', port=8080, debug=True)
