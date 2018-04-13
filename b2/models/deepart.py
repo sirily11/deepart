@@ -151,6 +151,7 @@ class transformer:
             end_time = time.time()
             print('Iteration %d completed in %ds' % (i, end_time - start_time))
             self.current_iteration = i
+        self.current_iteration += 1
         x = x.reshape((height, width, 3))
         x = x[:, :, ::-1]
         x[:, :, 0] += 103.939
@@ -161,5 +162,9 @@ class transformer:
 
     def calculate_the_progress(self):
         return round(((self.current_iteration+1)/self.target_iteration)*100,1)
+
+    def reset_status(self):
+        self.current_iteration = 0
+        self.target_iteration = 0
 
 

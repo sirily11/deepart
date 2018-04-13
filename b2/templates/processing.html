@@ -38,7 +38,9 @@
               $.getJSON('/background_processing', {
                                 proglang: $('input[name="proglang"]').val(),
                               }, function(data) {
-                                move(data.progress)
+                                  if(data >= 100){
+                                    clearInterval(id);
+                                  }
                               });
                             }
                         }

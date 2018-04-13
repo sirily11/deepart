@@ -102,6 +102,9 @@ def background_processing():
     progress = 0
     try:
         progress = trans.calculate_the_progress()
+        if progress > 100:
+            trans.reset_status()
+            progress = 100
         data = {'progress' : progress}
         print(progress)
         return json.dumps(data)
